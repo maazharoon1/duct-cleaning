@@ -612,3 +612,13 @@ p { line-height: 1.55; }
   .vertical-home .panel-heading { display: block; }
   .vertical-home .panel-link { display: inline-flex; margin-top: 9px; }
 }
+
+/* Keep form controls readable and prevent mobile input zoom. */
+.contact-panel .field input,
+.contact-panel .field textarea,
+.contact-panel .field .form-select { font-size: 16px; }
+.field .form-select { display: flex; justify-content: space-between; align-items: center; }
+.field-error { color: #b42318; font-size: 13px; line-height: 1.5; }
+.review-grid.reviews-visible-1 { grid-template-columns: minmax(0, 1fr); }
+.review-grid.reviews-visible-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.review-grid.reviews-visible-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }

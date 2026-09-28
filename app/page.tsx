@@ -28,7 +28,7 @@ export default function Home() {
     <Header />
     <main className="site-main vertical-home">
       <section id="home" className="home-section" aria-labelledby="hero-title">
-        <Reveal className="hero-card">
+        <div className="hero-card">
           <div className="hero-top">
             <div className="hero-content">
               <p className="hero-pill">CLEANER AIR. BETTER LIVING.</p>
@@ -41,7 +41,7 @@ export default function Home() {
               <div className="hero-small-note"><Check size={15} /> Three services, one cleaner home.</div>
             </div>
             <div className="hero-visual">
-              <Image src="/images/duct-technician.jpg" alt="Technician opening a ceiling air vent" fill priority sizes="(max-width: 700px) 100vw, 54vw" />
+              <Image src="/images/duct-technician.jpg" alt="Technician opening a ceiling air vent" fill preload sizes="(max-width: 700px) 100vw, 54vw" />
               <div className="hero-visual-label"><span><Wind size={18} /></span> Focused on the air you live in.</div>
             </div>
           </div>
@@ -50,7 +50,7 @@ export default function Home() {
             <div><span><Fan size={20} /></span><strong>Purposeful cleaning</strong></div>
             <div><span><CircleCheck size={20} /></span><strong>Clear, simple process</strong></div>
           </div>
-        </Reveal>
+        </div>
       </section>
 
       <section id="services" className="home-section" aria-labelledby="services-title">
@@ -64,7 +64,7 @@ export default function Home() {
         <Reveal className="compare-panel">
           <div className="compare-header"><p className="eyebrow">BEFORE & AFTER</p><h2 id="difference-title">The difference is inside.</h2><p>Slide to explore an illustrative view of a duct before and after cleaning.</p></div>
           <div className="compare-panel-body"><Comparison /><div className="compare-benefits"><div><span><Sparkles size={18} /></span><strong>Less buildup</strong><small>Address dust and debris.</small></div><div><span><Wind size={18} /></span><strong>Better airflow</strong><small>Clearer pathways for air.</small></div><div><span><House size={18} /></span><strong>More comfort</strong><small>Care for hidden spaces.</small></div></div></div>
-          <p className="illustration-note">Illustration only. Actual conditions and results vary by home.</p>
+
         </Reveal>
       </section>
 
@@ -92,16 +92,16 @@ export default function Home() {
         <Reveal className="review-panel">
           <div className="review-panel-heading"><p className="eyebrow">TESTIMONIALS</p><h2 id="reviews-title">What homeowners are saying</h2><p>Sample feedback for this site template.</p></div>
           <Reviews />
-          <p className="sample-note">Replace these sample testimonials with verified customer reviews before publishing.</p>
+
         </Reveal>
       </section>
 
-      <section  className="home-section" aria-labelledby="contact-title">
+      <section id="contact" className="home-section" aria-labelledby="contact-title">
         <Reveal className="contact-panel">
-          <div id="contact" className="contact-panel-intro"><p className="eyebrow">CONTACT US</p><h2 id="contact-title">Ready for cleaner air?</h2><p>Tell us which part of your home needs attention, and request a free estimate.</p></div>
+          <div className="contact-panel-intro"><p className="eyebrow">CONTACT US</p><h2 id="contact-title">Ready for cleaner air?</h2><p>Tell us which part of your home needs attention, and request a free estimate.</p></div>
           <div className="contact-panel-grid">
             <div className="contact-panel-visual"><Image src="/images/home-interior.jpg" alt="Bright, comfortable living room" fill sizes="(max-width: 700px) 100vw, 45vw" /><div><span><House size={23} /></span><strong>Clean air. Better living.</strong><p>Focused cleaning for the spaces you use every day.</p></div></div>
-            <div className="form-panel"><div className="form-panel-heading"><h3>Get a Free Estimate</h3><p>Fill in the form below. This demo does not send submissions.</p></div><EstimateForm /></div>
+            <div className="form-panel"><div className="form-panel-heading"><h3>Get a Free Estimate</h3><p>Fill in the form and our team will follow up.</p></div><EstimateForm /></div>
           </div>
         </Reveal>
       </section>

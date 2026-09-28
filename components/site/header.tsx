@@ -48,9 +48,9 @@ export function Header() {
   return <>
     <header className={"site-header" + (scrolled ? " is-scrolled" : "")}>
       <div className="header-inner">
-        <a className="brand-link" href="/#home" onClick={handleHomeClick}><Brand /></a>
-        <nav className="desktop-nav" aria-label="Main navigation">{links.map((link) => <a key={link.href} href={link.href} onClick={link.href === "/#home" ? handleHomeClick : undefined}>{link.label}</a>)}</nav>
-        <a className="button button-primary header-cta" href="/#contact">Get a Free Estimate <ArrowRight size={17} /></a>
+        <Link className="brand-link" href="/#home" onClick={handleHomeClick}><Brand /></Link>
+        <nav className="desktop-nav" aria-label="Main navigation">{links.map((link) => <Link key={link.href} href={link.href} onClick={link.href === "/#home" ? handleHomeClick : undefined}>{link.label}</Link>)}</nav>
+        <Link className="button button-primary header-cta" href="/#contact">Get a Free Estimate <ArrowRight size={17} /></Link>
         <button className="mobile-toggle" type="button" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen(!open)}>{open ? <X size={23} /> : <Menu size={23} />}</button>
       </div>
     </header>
@@ -64,8 +64,8 @@ export function Header() {
         exit={reduced ? undefined : { opacity: 0, y: -12 }}
         transition={{ duration: 0.22 }}
       >
-        <div className="mobile-menu-links">{links.map((link) => <a key={link.href} href={link.href} onClick={link.href === "/#home" ? handleHomeClick : () => setOpen(false)}>{link.label}<ArrowRight size={19} /></a>)}</div>
-        <a href="/#contact" className="button button-primary" onClick={() => setOpen(false)}>Get a Free Estimate <ArrowRight size={18} /></a>
+        <div className="mobile-menu-links">{links.map((link) => <Link key={link.href} href={link.href} onClick={link.href === "/#home" ? handleHomeClick : () => setOpen(false)}>{link.label}<ArrowRight size={19} /></Link>)}</div>
+        <Link href="/#contact" className="button button-primary" onClick={() => setOpen(false)}>Get a Free Estimate <ArrowRight size={18} /></Link>
         <p>Cleaner air. Better living.</p>
       </motion.nav>}
     </AnimatePresence>
