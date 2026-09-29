@@ -622,3 +622,30 @@ p { line-height: 1.55; }
 .review-grid.reviews-visible-1 { grid-template-columns: minmax(0, 1fr); }
 .review-grid.reviews-visible-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .review-grid.reviews-visible-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+.floating-link {
+  position: fixed;
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  z-index: 40;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  box-shadow: 0 5px 22px rgb(0 0 0 / 15%);
+  text-decoration: none;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+.floating-link:hover { transform: translateY(-3px); box-shadow: 0 8px 26px rgb(0 0 0 / 22%); }
+.floating-link:focus-visible { outline: 3px solid #1565c0; outline-offset: 5px; }
+.floating-whatsapp { left: calc(24px + env(safe-area-inset-left, 0px)); width: 56px; border-radius: 50%; background: #25d366; color: white; }
+.floating-trustpilot { right: calc(24px + env(safe-area-inset-right, 0px)); gap: 8px; padding: 0 16px; border: 1px solid #e5e7eb; border-radius: 28px; background: white; color: #191919; font-size: 15px; font-weight: 650; }
+.site-footer { padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
+@media (max-width: 700px) {
+  .floating-link { bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
+  .floating-whatsapp { left: calc(16px + env(safe-area-inset-left, 0px)); }
+  .floating-trustpilot { right: calc(16px + env(safe-area-inset-right, 0px)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .floating-link { transition: none; }
+  .floating-link:hover { transform: none; }
+}

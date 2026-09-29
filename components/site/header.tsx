@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, Menu, X } from "lucide-react";
+import { ArrowRight, Menu, Phone, X } from "lucide-react";
 import { Brand } from "./brand";
+import { businessPhone } from "./floating-links";
 
 const links = [
   { label: "Home", href: "/#home" },
@@ -50,7 +51,7 @@ export function Header() {
       <div className="header-inner">
         <Link className="brand-link" href="/#home" onClick={handleHomeClick}><Brand /></Link>
         <nav className="desktop-nav" aria-label="Main navigation">{links.map((link) => <Link key={link.href} href={link.href} onClick={link.href === "/#home" ? handleHomeClick : undefined}>{link.label}</Link>)}</nav>
-        <Link className="button button-primary header-cta" href="/#contact">Get a Free Estimate <ArrowRight size={17} /></Link>
+        <a className="button button-primary header-cta" href={`tel:${businessPhone}`} aria-label="Call Duct Master">Call now <Phone size={17} /></a>
         <button className="mobile-toggle" type="button" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen(!open)}>{open ? <X size={23} /> : <Menu size={23} />}</button>
       </div>
     </header>

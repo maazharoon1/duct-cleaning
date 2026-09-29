@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { RouteScrollReset } from "@/components/site/route-scroll-reset";
 import { Toaster } from "@/components/ui/sonner";
+import { FloatingLinks } from "@/components/site/floating-links";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 
@@ -12,5 +13,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
-  return <html lang="en" className={inter.variable}><body>{children}<RouteScrollReset /><Toaster /></body></html>;
+  return <html lang="en" className={inter.variable}><body>{children}<FloatingLinks /><RouteScrollReset /><Toaster /></body></html>;
 }
