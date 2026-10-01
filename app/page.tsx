@@ -35,7 +35,7 @@ export default function Home() {
               <h1 id="hero-title">Professional Duct Cleaning for a <span>Healthier Home.</span></h1>
               <p>We clean air ducts, dryer vents, and chimneys to help reduce buildup, improve airflow, and make your home feel more comfortable.</p>
               <div className="hero-actions">
-                <Link className="button button-primary" href="/#contact">Get a Free Estimate <ArrowRight size={17} /></Link>
+                <Link className="button button-primary " href="/#contact">Get a Free Estimate <ArrowRight size={17} /></Link>
                 <Link className="button button-outline" href="/services">Explore Services <ArrowUpRight size={17} /></Link>
               </div>
               <div className="hero-small-note"><Check size={15} /> Three services, one cleaner home.</div>
