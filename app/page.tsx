@@ -90,7 +90,7 @@ export default function Home() {
 
       <section id="reviews" className="home-section" aria-labelledby="reviews-title">
         <Reveal className="review-panel">
-          <div className="review-panel-heading"><p className="eyebrow">TESTIMONIALS</p><h2 id="reviews-title">What homeowners are saying</h2><p>Sample feedback for this site template.</p></div>
+          <div className="review-panel-heading"><p className="eyebrow">TESTIMONIALS</p><h2 id="reviews-title">What homeowners are saying</h2></div>
           <Reviews />
 
         </Reveal>
