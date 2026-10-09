@@ -1,4 +1,4 @@
-export const businessPhone = "+17085295292";
+export const businessPhone = "+17085295392";
 const whatsappNumber = businessPhone.replace(/\D/g, "");
 // Replace this placeholder with your business's real Trustpilot profile URL.
 const trustpilotUrl = "https://www.trustpilot.com/";

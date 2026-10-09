@@ -66,7 +66,7 @@ export function Header() {
         transition={{ duration: 0.22 }}
       >
         <div className="mobile-menu-links">{links.map((link) => <Link key={link.href} href={link.href} onClick={link.href === "/#home" ? handleHomeClick : () => setOpen(false)}>{link.label}<ArrowRight size={19} /></Link>)}</div>
-        <Link href="/#contact" className="button button-primary" onClick={() => setOpen(false)}>Get a Free Estimate <ArrowRight size={18} /></Link>
+        <a href={`tel:${businessPhone}`} className="button button-primary" aria-label="Call Duct Master" onClick={() => setOpen(false)}>Call Now <Phone size={18} /></a>
         <p>Cleaner air. Better living.</p>
       </motion.nav>}
     </AnimatePresence>

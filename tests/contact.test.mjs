@@ -23,11 +23,11 @@ function load(file, dependencies = {}, env = {}) {
 
 const validation = load("lib/contact-validation.ts");
 const valid = { fullName: "Test Customer", phone: "(555) 123-4567", email: "test@example.com", zip: "90210", service: "Air Duct Cleaning", message: "" };
-function handler({ env = { GMAIL_USER: "sender@example.com", GMAIL_APP_PASSWORD: "test", CONTACT_RECEIVER_EMAIL: "receiver@example.com" }, sendMail = async () => ({ accepted: ["receiver@example.com"], rejected: [] }) } = {}) {
+function handler({ env = { GMAIL_USER: "sender@example.com", GMAIL_APP_PASSWORD: "test", CONTACT_RECEIVER_EMAIL: "receiver@example.com" }, sendMail = async () => ({ accepted: ["receiver@example.com"], rejected: [] }), onTransport = () => {} } = {}) {
   return load("app/api/contact/route.ts", {
     "@/lib/contact-validation": validation,
     "next/server": { NextResponse: Response },
-    nodemailer: { createTransport: () => ({ sendMail, close() {} }) },
+    nodemailer: { createTransport: (options) => { onTransport(options); return { sendMail, close() {} }; } },
   }, env).POST;
 }
 const request = (body) => new Request("http://localhost/api/contact", { method: "POST", body: typeof body === "string" ? body : JSON.stringify(body) });
@@ -39,9 +39,22 @@ test("accepts an optional empty message and normalizes contact details", () => {
   assert.equal(result.data.message, "");
 });
 
-test("rejects missing services, invalid fields, whitespace and non-string values", () => {
-  for (const input of [null, [], { ...valid, service: "" }, { ...valid, service: "Other" }, { ...valid, fullName: "  " }, { ...valid, phone: "-------" }, { ...valid, phone: {} }, { ...valid, email: "invalid" }, { ...valid, zip: "123" }, { ...valid, message: "x".repeat(1001) }]) {
+test("rejects unknown services, invalid fields, whitespace and non-string values", () => {
+  for (const input of [null, [], { ...valid, service: "Other" }, { ...valid, service: {} }, { ...valid, fullName: "  " }, { ...valid, phone: "-------" }, { ...valid, phone: {} }, { ...valid, email: "invalid" }, { ...valid, zip: "123" }, { ...valid, message: "x".repeat(1001) }]) {
     assert.equal(validation.validateContact(input).success, false);
+  }
+});
+
+test("optional service accepts omitted and blank values and sends a clear email fallback", async () => {
+  for (const service of [undefined, "", "   "]) {
+    const result = validation.validateContact({ ...valid, service });
+    assert.equal(result.success, true);
+    assert.equal(result.data.service, "");
+    let sent;
+    const response = await handler({ sendMail: async (message) => { sent = message; return { accepted: ["receiver@example.com"], rejected: [] }; } })(request({ ...valid, service }));
+    assert.equal(response.status, 200);
+    assert.match(sent.subject, /Service not specified/);
+    assert.match(sent.text, /Service: Not specified/);
   }
 });
 
@@ -60,6 +73,21 @@ test("oversized submissions return 413", async () => {
 
 test("missing mail configuration returns a recoverable 503", async () => {
   assert.equal((await handler({ env: {} })(request(valid))).status, 503);
+  assert.equal((await handler({ env: { GMAIL_USER: " ", GMAIL_APP_PASSWORD: " ", CONTACT_RECEIVER_EMAIL: " " } })(request(valid))).status, 503);
+});
+
+test("normalizes copied Gmail app password spaces and email whitespace", async () => {
+  let transport;
+  let sent;
+  const response = await handler({
+    env: { GMAIL_USER: " sender@example.com ", GMAIL_APP_PASSWORD: "abcd efgh ijkl mnop", CONTACT_RECEIVER_EMAIL: " receiver@example.com " },
+    onTransport: (options) => { transport = options; },
+    sendMail: async (message) => { sent = message; return { accepted: ["receiver@example.com"], rejected: [] }; },
+  })(request(valid));
+  assert.equal(response.status, 200);
+  assert.equal(transport.auth.user, "sender@example.com");
+  assert.equal(transport.auth.pass, "abcdefghijklmnop");
+  assert.equal(sent.to, "receiver@example.com");
 });
 
 test("success includes service, ZIP and safe plain-text message in the email", async () => {

@@ -31,6 +31,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
@@ -618,6 +620,9 @@ p { line-height: 1.55; }
 .contact-panel .field textarea,
 .contact-panel .field .form-select { font-size: 16px; }
 .field .form-select { display: flex; justify-content: space-between; align-items: center; }
+.service-dropdown { background: white; color: var(--charcoal); border: 1px solid var(--line); border-radius: 8px; padding: 4px; box-shadow: 0 8px 24px rgb(41 38 101 / 15%); }
+.service-dropdown [data-slot="select-item"] { min-height: 44px; padding: 10px 32px 10px 12px; border-radius: 5px; font-size: 14px; line-height: 1.4; }
+.service-dropdown [data-slot="select-item"][data-highlighted] { background: var(--sky); color: var(--indigo); }
 .field-error { color: #b42318; font-size: 13px; line-height: 1.5; }
 .review-grid.reviews-visible-1 { grid-template-columns: minmax(0, 1fr); }
 .review-grid.reviews-visible-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
